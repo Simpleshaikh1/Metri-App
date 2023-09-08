@@ -1,8 +1,9 @@
+import React from 'react';
 
 const AboutPage = () => (
-    <div>
-      <p>This is about Page</p>
-    </div>
-  );
-  
-  export default AboutPage;
+  <div className="container">
+    <p>About Sharecoin</p>
+  </div>
+);
+
+export default AboutPage;
