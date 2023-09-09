@@ -3,7 +3,7 @@ import coinReducer from './coinlore/CoinSlice';
 
 const store = configureStore({
   reducer: {
-    coin: coinReducer,
+    coinLi: coinReducer,
   },
 });
 

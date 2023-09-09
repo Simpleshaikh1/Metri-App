@@ -54,6 +54,16 @@ nav {
   background-color: var(--light-red);
 }
 
+.logo {
+  border: 1px solid var(--white);
+  padding: 10px 50px;
+}
+
+.txt {
+  color: white;
+  font-size: larger;
+}
+
 .d-flex-space-be {
   display: flex;
   flex-wrap: wrap;

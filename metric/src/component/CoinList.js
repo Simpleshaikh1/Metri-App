@@ -12,7 +12,7 @@ const ListCoins = () => {
     inputRef.current.focus();
   }, []);
 
-  const coinLists = useSelector((store) => store.coin);
+  const coinLists = useSelector((store) => store.coinLi);
   useEffect(() => {
     dispatch(getCoins());
   }, [dispatch]);
@@ -24,10 +24,8 @@ const ListCoins = () => {
 
   const navigate = useNavigate();
   const detailPage = (coins) => {
-    navigate(`details/${coins.id}`, { state: { coins } });
+    navigate(`/details/${coins.name}`, { state: { coins } });
   };
-
-  // console.log(detailPage(), 'detail-page');
 
   return (
     <>
@@ -44,43 +42,37 @@ const ListCoins = () => {
         </div>
         <BsSearch className="search-icon" />
       </form>
-      <div className="container grid my5s">
+      <div className="container grid my5">
         {coinLists.isLoading && <div>loading...</div>}
         {
-          !coinLists.isLoading && coinLists.coinList
-            .filter((coin) => {
-              const { symbol } = coin;
-              console.log(symbol);
-              return search.toLocaleLowerCase() === '' ? coin : symbol.toLocaleLowerCase().includes(search.toLocaleLowerCase());
-            })
-            .map((coin) => {
-              const { changePercent } = coin;
-              return (
-                <button
-                  type="button"
-                  key={coin.id}
-                  className="card"
-                  onClick={() => detailPage(coin)}
-                >
-                  <h3>{coin.symbol}</h3>
-                  <div className="statistic">
-                    <div className="face-up">
-                      {changePercent < 0 ? (
-                        <span>
-                          <FaChevronDown color="red" />
-                          {Math.abs(changePercent).toFixed(2)}
-                        </span>
-                      ) : (
-                        <span>
-                          <FaChevronUp color="green" />
-                          {Math.abs(changePercent).toFixed(2)}
-                        </span>
-                      )}
-                    </div>
+          !coinLists?.isLoading && coinLists?.coinList?.data?.map((coin) => {
+            const { percent_change_24h } = coin;
+            return (
+              <button
+                type="button"
+                key={coin.id}
+                className="card"
+                onClick={() => detailPage(coin)}
+              >
+                <h3>{coin.symbol}</h3>
+                <div className="statistic">
+                  <div className="face-up">
+                    {percent_change_24h < 0 ? (
+                      <span>
+                        <FaChevronDown color="red" />
+                        {Math.abs(percent_change_24h).toFixed(2)}
+                      </span>
+                    ) : (
+                      <span>
+                        <FaChevronUp color="green" />
+                        {Math.abs(percent_change_24h).toFixed(2)}
+                      </span>
+                    )}
                   </div>
-                </button>
-              );
-            })
+                </div>
+              </button>
+            );
+          })
         }
       </div>
     </>
