@@ -7,12 +7,12 @@ const initialState = {
   error: '',
 };
 
-// const getCoinUrl = 'https://api.coinlore.net/api/tickers/';
-const getCoinUrl = 'https://api.coincap.io/v2/assets';
+const getCoinUrl = 'https://api.coinlore.net/api/tickers/';
+// const getCoinUrl = 'https://api.coincap.io/v2/assets';
 
-export const getCoins = createAsyncThunk('coins/getCoins', async (_, api) => {
+export const getCoins = createAsyncThunk('crypto/fetchCrypto', async (_, api) => {
   try {
-    const res = await axios(getCoinUrl);
+    const res = await axios.get(getCoinUrl);
     return res.data;
   } catch (error) {
     return api.rejectWithValue('Api failed to fetch');
@@ -20,7 +20,7 @@ export const getCoins = createAsyncThunk('coins/getCoins', async (_, api) => {
 });
 
 const coinSlice = createSlice({
-  name: 'coins',
+  name: 'coinList',
   initialState,
 
   reducers: {},
@@ -31,12 +31,12 @@ const coinSlice = createSlice({
       })
       .addCase(getCoins.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.coins = action.payload;
+        state.coinList = action.payload;
         state.error = '';
       })
       .addCase(getCoins.rejected, (state, action) => {
         state.isLoading = false;
-        state.coin = [];
+        state.coinList = [];
         state.error = action.error.message;
       });
   },

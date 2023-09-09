@@ -12,7 +12,7 @@ const DetailPage = () => {
   };
 
   const { coins } = location.state || { coins: {} };
-  const { priceUsd } = coins;
+  const { price_btc } = coins;
 
   return (
     <div className="container">
@@ -28,7 +28,7 @@ const DetailPage = () => {
             Market Cap:
             <span>
               $
-              { Number(coins.marketUsd).toLocaleString(undefined, {
+              { Number(coins.market_cap_usd).toLocaleString(undefined, {
                 maximumFractionDigits: 2,
               })}
             </span>
@@ -41,14 +41,14 @@ const DetailPage = () => {
               { ' ' }
             </span>
             { ' ' }
-            { Math.abs(priceUsd).toFixed(5)}
+            { Math.abs(price_btc).toFixed(5)}
           </p>
           <p className="24hr d-flex-space-be">
             24h %:
             { ' ' }
             <span>
               { ' ' }
-              { Number(coins.maxSupply).toLocaleString(undefined, {
+              { Number(coins.msupply).toLocaleString(undefined, {
                 maximumFractionDigits: 2,
               })}
             </span>
@@ -58,7 +58,27 @@ const DetailPage = () => {
             <span>
               $
               { ' ' }
-              { Number(coins.volumeUsd24hr).toLocaleString(undefined, {
+              { Number(coins.volume24).toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}
+            </span>
+          </p>
+          <p className="volume d-flex-space-be">
+            Price(Usd):
+            <span>
+              $
+              { ' ' }
+              { Number(coins.price_usd).toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}
+            </span>
+          </p>
+          <p className="volume d-flex-space-be">
+            Total Supply:
+            <span>
+              $
+              { ' ' }
+              { Number(coins.tsupply).toLocaleString(undefined, {
                 maximumFractionDigits: 2,
               })}
             </span>
